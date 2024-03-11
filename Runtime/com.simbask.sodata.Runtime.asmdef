@@ -1,0 +1,14 @@
+{
+    "name": "com.simbask.sodata.Runtime",
+    "rootNamespace": "com.simbask.sodata.Runtime",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
