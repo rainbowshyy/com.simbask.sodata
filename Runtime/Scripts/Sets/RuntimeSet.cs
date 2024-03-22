@@ -24,7 +24,7 @@ namespace com.simbask.sodata.Runtime
         {
             int hash = Guid.NewGuid().GetHashCode();
             if (Items.ContainsValue(t))
-                return null;
+                return -1;
 
             Items.Add(hash, t);
             OnAddValue?.Invoke(hash);
