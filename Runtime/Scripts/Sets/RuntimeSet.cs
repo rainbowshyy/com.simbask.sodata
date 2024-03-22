@@ -12,6 +12,8 @@ namespace com.simbask.sodata.Runtime
     public abstract class RuntimeSet<T> : ScriptableObject
     {
         public Dictionary<int, T> Items = new Dictionary<int, T>();
+        public Action<int> OnAddValue;
+        public Action<int> OnRemoveValue;
 
         /// <summary>
         /// Adds an element to the hashmap and returns its key.
@@ -21,7 +23,11 @@ namespace com.simbask.sodata.Runtime
         public int Add(T t)
         {
             int hash = Guid.NewGuid().GetHashCode();
-            if (!Items.ContainsValue(t)) Items.Add(hash, t);
+            if (Items.ContainsValue(t))
+                return null;
+
+            Items.Add(hash, t);
+            OnAddValue?.Invoke(hash);
             return hash;
         }
 
@@ -31,7 +37,11 @@ namespace com.simbask.sodata.Runtime
         /// <param name="hash">The hash of the object (generated in the Add function).</param>
         public void Remove(int hash)
         {
-            if (Items.ContainsKey(hash)) Items.Remove(hash);
+            if (!Items.ContainsKey(hash))
+                return;
+
+            OnRemoveValue?.Invoke(hash);
+            Items.Remove(hash);
         }
 
         public T GetItem(int hash)
